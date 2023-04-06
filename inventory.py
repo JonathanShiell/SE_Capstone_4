@@ -70,14 +70,17 @@ shoe_list = []
 
 #==========Functions outside the class==============
 def read_shoes_data():
-    pass
-    '''
-    This function will open the file inventory.txt
-    and read the data from this file, then create a shoes object with this data
-    and append this object into the shoes list. One line in this file represents
-    data to create one object of shoes. You must use the try-except in this function
-    for error handling. Remember to skip the first line using your code.
-    '''
+    """
+        Does not accept any arguments, nor does it return values.    
+    
+        This function opens the file inventory.txt and read the data from this file, 
+    then create a shoes object with this data and append this object into the shoes 
+    list. One line in this file represents data to create one object of shoes. The first
+    line contains column headings and therefore is skipped.
+    
+    This uses the try-except statements for error handling.
+    """
+
     # Read in the file data
     filename = "inventory.txt"
     with open(filename, "rt") as f:
@@ -99,12 +102,12 @@ def read_shoes_data():
 
 
 def capture_shoes():
-    pass
-    '''
-    This function will allow a user to capture data
-    about a shoe and use this data to create a shoe object
-    and append this object inside the shoe list.
-    '''
+    """
+        This function allows a user to capture data about a shoe and use this data to 
+    create a shoe object and append this object inside the shoe list.
+    """
+
+    # Obtain details from user
     new_code = input("Please enter the product code:")
     new_product = input(f"Please enter the product name for {new_code}:")
     new_country = input(f"Please enter the country for {new_code}:")
@@ -118,24 +121,24 @@ def capture_shoes():
     shoe_list.append(new_shoe)
 
 def view_all():
-    pass
-    '''
-    This function will iterate over the shoes list and
-    print the details of the shoes returned from the __str__
-    function. Optional: you can organise your data in a table format
-    by using Python’s tabulate module.
-    '''
+    """
+        This function iterates over the shoes list and prints the details of the shoes 
+    returned from the __str__ function.
+    """
+
+    # Iterate over shoe_list, print details for each
     for shoe in shoe_list:
         print(str(shoe))
 
 def re_stock():
-    pass
-    '''
-    This function will find the shoe object with the lowest quantity,
-    which is the shoes that need to be re-stocked. Ask the user if they
-    want to add this quantity of shoes and then update it.
-    This quantity should be updated on the file for this shoe.
-    '''
+    """
+        This function finds the shoe object with the lowest quantity, which is the 
+    type of shoes that need to be re-stocked. This ask the user if they want to add 
+    to the quantity of shoes and then update it.
+
+    The function then updates this quantity on the file for this shoe.
+    """
+
     # Get lowest stock level
     lowest_stock = min(shoe.get_quantity() for shoe in shoe_list)
 
@@ -206,11 +209,12 @@ def re_stock():
     
 
 def seach_shoe():
-    pass
-    '''
-     This function will search for a shoe from the list
-     using the shoe code and return this object so that it will be printed.
-    '''
+    """
+        This function searches for a shoe from the list using the shoe code and prints
+    the string representation of the shoe details.
+    """
+
+    # Obtain shoe code from user
     shoe_code = input("Please enter the shoe code: ")
 
     for shoe in shoe_list:
@@ -218,12 +222,12 @@ def seach_shoe():
             print(str(shoe))
 
 def value_per_item():
-    pass
-    '''
-    This function will calculate the total value for each item.
-    Please keep the formula for value in mind: value = cost * quantity.
-    Print this information on the console for all the shoes.
-    '''
+    """
+    This function calculates the total value for each item using the formula:
+    value = cost * quantity.
+    
+    Prints this information on the console for all the shoes.    
+    """
 
     for shoe in shoe_list:
         value = shoe.get_cost() * shoe.get_quantity()
@@ -231,11 +235,12 @@ def value_per_item():
 
 def highest_qty():
     pass
-    '''
-    To determine the product with the highest quantity and print this shoe as 
-being for sale. May print multiple shoes if they both/all have the same (highest) 
-stock level.
-    '''
+    """
+        Determines the product with the highest quantity and print this shoe as 
+    being for sale. May print multiple shoes if they both/all have the same (highest) 
+    stock level.
+    """
+
     # Get maximum stock
     highest_amount = max(shoe.get_quantity() for shoe in shoe_list)
 
@@ -245,10 +250,10 @@ stock level.
             print(shoe.product+",", "code:", shoe.code, "is for sale.")
 
 #==========Main Menu=============
-'''
-Create a menu that executes each function above.
-This menu should be inside the while loop. Be creative!
-'''
+"""
+A menu that executes the above functions, running in a while loop.
+"""
+
 # Read in shoe data before menu:
 read_shoes_data()
 # Print message:
@@ -266,11 +271,11 @@ q = quit
 """
 
 # Add formatting to menu message
-menu_message = "="*80 + "\n\n" + menu_message + "\n\n" + "="*80 + "\n"
+menu_message = "="*80 + "\n\n" + menu_message + "\n" + "="*80 + "\n"
 
 while True:
     print("="*80 + "\n") # Print spacing/formatting.
-    print(f"Shoe data read in OK with {len(shoe_list)} shoe types.\n") # Print pre-message with empty line.
+    print(f"Shoe data read in OK with {len(shoe_list)} shoe types.") # Print pre-message with empty line.
     option = input(menu_message).lower()[0] # Take first character only as lower case.
     # Print spacer
     print("="*80 + "\n") # Print spacing/formatting.
@@ -314,6 +319,6 @@ while True:
     elif option == "q":
         break
 
-    # Return around loop without valid option
+    # Return around loop if the user has not provided a valid option
     else:
         continue
